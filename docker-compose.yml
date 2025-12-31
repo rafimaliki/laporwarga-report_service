@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  report_be:
+    container_name: report_be
+    build: .
+    working_dir: /app
+    ports:
+      - "5001:5001"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      PORT: 5001
+      NODE_ENV: development
