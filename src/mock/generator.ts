@@ -222,23 +222,7 @@ export function generateMockReports(count: number): Report[] {
         escalation_reason: "Urgent",
         escalated_at: randomDate(),
       },
-      external_integration:
-        Math.random() > 0.7
-          ? [
-              {
-                system_name: "External System",
-                external_reference_id: randomUUID(),
-                synced_at: randomDate(),
-              },
-            ]
-          : [],
-      analytics: {
-        created_at: createdAt,
-        resolved_at: currentStatus === "resolved" ? randomDate() : "",
-        resolution_time_hours:
-          currentStatus === "resolved" ? Math.floor(Math.random() * 168) : 0,
-        sla_breached: Math.random() > 0.9,
-      },
+      created_at: createdAt,
     };
     reports.push(report);
   }

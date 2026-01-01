@@ -70,19 +70,6 @@ export interface Escalation {
   escalated_at: string | null;
 }
 
-export interface ExternalIntegration {
-  system_name: string;
-  external_reference_id: string;
-  synced_at: string;
-}
-
-export interface Analytics {
-  created_at: string;
-  resolved_at: string | null;
-  resolution_time_hours: number | null;
-  sla_breached: boolean;
-}
-
 export interface Report {
   report_id: string;
   type: ReportType;
@@ -97,6 +84,5 @@ export interface Report {
   votes: Votes;
   authority: Authority;
   escalation: Escalation;
-  external_integration: ExternalIntegration[];
-  analytics: Analytics;
+  created_at: string;
 }
