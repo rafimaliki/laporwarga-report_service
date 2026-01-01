@@ -1,7 +1,7 @@
-import { generateMockReports } from "../mock/generator";
+import { reportsData } from "@/mock/data";
 
 export const reportsService = {
   list: () => {
-    return generateMockReports(100);
+    return reportsData;
   },
 };

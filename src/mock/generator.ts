@@ -115,13 +115,15 @@ function randomDate(): string {
   const now = new Date();
   const past = new Date(
     now.getTime() - Math.random() * 365 * 24 * 60 * 60 * 1000
-  ); // up to 1 year ago
+  );
   return past.toISOString();
 }
 
 function randomIndonesianLocation() {
-  const lat = -11 + Math.random() * 15; // -11 to 4
-  const lng = 95 + Math.random() * 40; // 95 to 141
+  // Latitude: -11 to +6
+  // Longitude: 95 to 141
+  const lat = -11 + Math.random() * 17;
+  const lng = 95 + Math.random() * 46;
   return { lat, lng };
 }
 
@@ -143,7 +145,7 @@ export function generateMockReports(count: number): Report[] {
     const reporterName = randomElement(names);
     const userId = randomUUID();
 
-    const mediaCount = Math.floor(Math.random() * 4); // 0-3 media
+    const mediaCount = Math.floor(Math.random() * 4);
     const media: Media[] = [];
     for (let j = 0; j < mediaCount; j++) {
       const mediaType = randomElement(mediaTypes);
@@ -160,7 +162,7 @@ export function generateMockReports(count: number): Report[] {
     }
 
     const timeline: TimelineEntry[] = [];
-    const timelineCount = Math.floor(Math.random() * 5) + 1; // 1-5 entries
+    const timelineCount = Math.floor(Math.random() * 5) + 1;
     for (let k = 0; k < timelineCount; k++) {
       timeline.push({
         status: randomElement(statuses),
