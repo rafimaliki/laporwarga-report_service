@@ -37,9 +37,8 @@ const agencies = [
   "Pemerintah Daerah",
 ];
 
-// Indonesian cities with real coordinates (population-weighted for realistic distribution)
 const indonesianCities = [
-  // Java (high population density - more reports expected here)
+  // Java
   {
     name: "Jakarta Pusat",
     province: "DKI Jakarta",
@@ -270,7 +269,6 @@ const indonesianCities = [
   { name: "Ambon", province: "Maluku", lat: -3.6954, lng: 128.1814, weight: 1 },
 ];
 
-// Build weighted array for population-based distribution
 const weightedCities: typeof indonesianCities = [];
 indonesianCities.forEach((city) => {
   for (let i = 0; i < city.weight; i++) {
@@ -278,7 +276,6 @@ indonesianCities.forEach((city) => {
   }
 });
 
-// Street names for realistic addresses
 const streetNames = [
   "Sudirman",
   "Thamrin",
@@ -400,7 +397,7 @@ function randomDateAfter(baseDate: Date, maxDaysAfter: number = 30): string {
 function randomIndonesianLocation() {
   const city = randomElement(weightedCities);
 
-  const latOffset = (Math.random() - 0.5) * 0.05; // ~5.5km range
+  const latOffset = (Math.random() - 0.5) * 0.05;
   const lngOffset = (Math.random() - 0.5) * 0.05;
 
   return {
@@ -442,17 +439,16 @@ export function generateMockReports(count: number): Report[] {
         media_id: randomUUID(),
         type: mediaType,
         url,
-        uploaded_at: randomDateAfter(createdDate, 1), // Within 1 day of creation
+        uploaded_at: randomDateAfter(createdDate, 1),
       });
     }
 
-    // Create timeline with chronological order
     const timeline: TimelineEntry[] = [];
     const timelineCount = Math.floor(Math.random() * 5) + 1;
     let lastTimestamp = createdDate;
 
     for (let k = 0; k < timelineCount; k++) {
-      const dayOffset = (k + 1) * (Math.random() * 5 + 1); // 1-6 days between events
+      const dayOffset = (k + 1) * (Math.random() * 5 + 1);
       const eventDate = new Date(
         createdDate.getTime() + dayOffset * 24 * 60 * 60 * 1000
       );
@@ -470,7 +466,6 @@ export function generateMockReports(count: number): Report[] {
       lastTimestamp = eventDate;
     }
 
-    // Sort timeline by timestamp
     timeline.sort(
       (a, b) =>
         new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
@@ -505,7 +500,7 @@ export function generateMockReports(count: number): Report[] {
       media,
       status: {
         current: currentStatus,
-        updated_at: lastTimestamp.toISOString(), // Use last timeline event timestamp
+        updated_at: lastTimestamp.toISOString(),
       },
       timeline,
       votes: {
